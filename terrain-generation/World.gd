@@ -1,45 +1,22 @@
 extends Spatial
 
-var size = 512
+const TerrainHeightGenerator = preload("res://scripts/TerrainHeightGenerator.gd")
+const WorldChunk = preload("res://scripts/nodes/WorldChunk.gd")
+
+var chunk_size = 512
 var height = 64
 
 func _ready():
-	var noise = OpenSimplexNoise.new()
-	noise.period = 80
-	noise.octaves = 6
-	
-	var plane_mesh = PlaneMesh.new()
-	plane_mesh.size = Vector2(size, size)
-	plane_mesh.subdivide_depth = size * 0.5
-	plane_mesh.subdivide_width = size * 0.5
-	
-	var surface_tool = SurfaceTool.new()
-	surface_tool.create_from(plane_mesh, 0)
-	
-	var array_mesh = surface_tool.commit()
-	
-	var mesh_data_tool = MeshDataTool.new()
-	mesh_data_tool.create_from_surface(array_mesh, 0)
-	
-	for i in range(mesh_data_tool.get_vertex_count()):
-		var vertex = mesh_data_tool.get_vertex(i)
-		vertex.y = noise.get_noise_3d(vertex.x, vertex.y, vertex.z) * height
-		
-		mesh_data_tool.set_vertex(i, vertex)
-	
-	for i in range(array_mesh.get_surface_count()):
-		array_mesh.surface_remove(i)
-	
-	mesh_data_tool.commit_to_surface(array_mesh)
-	surface_tool.begin(Mesh.PRIMITIVE_TRIANGLES)
-	surface_tool.create_from(array_mesh, 0)
-	surface_tool.generate_normals()
-	
-	var mesh_instance = MeshInstance.new()
-	mesh_instance.mesh = surface_tool.commit()
-	mesh_instance.set_surface_material(0, load("res://materials/terrain.material"))
-	
-	add_child(mesh_instance)
+	add_world_chunk()
 
 func _process(delta):
 	$Rotate.rotate_y(delta * 0.2)
+	
+func add_world_chunk():
+	var terrain_height_generator = TerrainHeightGenerator.new(chunk_size, height)
+	
+	var world_chunk = WorldChunk.new()
+	var terrain_material = load("res://materials/terrain.material")
+	world_chunk.configure(terrain_height_generator, terrain_material)
+	
+	add_child(world_chunk)
