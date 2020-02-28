@@ -37,7 +37,7 @@ func _ready():
 	
 	var mesh_instance = MeshInstance.new()
 	mesh_instance.mesh = surface_tool.commit()
-	mesh_instance.set_surface_material(0, load("res://terrain.material"))
+	mesh_instance.set_surface_material(0, load("res://materials/terrain.material"))
 	
 	add_child(mesh_instance)
 
