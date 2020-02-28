@@ -1,17 +1,9 @@
 extends Object
 
 var chunk_size
-var height
-
-func _init(chunk_size, height):
-	self.chunk_size = chunk_size
-	self.height = height
+var noise_generator
 
 func get_mesh():
-	var noise = OpenSimplexNoise.new()
-	noise.period = 80
-	noise.octaves = 6
-	
 	var plane_mesh = PlaneMesh.new()
 	plane_mesh.size = Vector2(chunk_size, chunk_size)
 	plane_mesh.subdivide_depth = chunk_size * 0.5
@@ -27,7 +19,11 @@ func get_mesh():
 	
 	for i in range(mesh_data_tool.get_vertex_count()):
 		var vertex = mesh_data_tool.get_vertex(i)
-		vertex.y = noise.get_noise_3d(vertex.x, vertex.y, vertex.z) * height
+		
+		if(noise_generator.has_method("get_noise")):
+			vertex.y = noise_generator.get_noise(vertex.x, vertex.z)
+		else:
+			vertex.y = 0
 		
 		mesh_data_tool.set_vertex(i, vertex)
 	

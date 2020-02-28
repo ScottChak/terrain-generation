@@ -4,9 +4,11 @@
 
 [node name="World" type="Spatial"]
 script = ExtResource( 1 )
+terrain_base_height = 4
+terrain_noise_type = 1
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 64, 32, 0 )
+transform = Transform( -4.37114e-08, -0.5, 0.866025, 0, 0.866025, 0.5, -1, 2.18557e-08, -3.78552e-08, 64, 32, 0 )
 
 [node name="Rotate" type="Spatial" parent="."]
 
