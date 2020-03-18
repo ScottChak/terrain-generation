@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scripts/scenes/CameraRig.gd" type="Script" id=1]
+
+[node name="CameraRig" type="Spatial"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Elbow" type="Spatial" parent="."]
+
+[node name="Arm" type="Spatial" parent="Elbow"]
+
+[node name="Wrist" type="Spatial" parent="Elbow/Arm"]
+
+[node name="Camera" type="Camera" parent="Elbow/Arm/Wrist"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8 )

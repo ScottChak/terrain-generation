@@ -1,7 +1,7 @@
 extends Spatial
 
-const FlatNoiseGenerator = preload("res://scripts/noise_generators/FlatNoiseGenerator.gd")
-const OpenSimplexNoiseGenerator = preload("res://scripts/noise_generators/OpenSimplexNoiseGenerator.gd")
+const FlatNoiseGenerator = preload("res://scripts/noise-generators/FlatNoiseGenerator.gd")
+const OpenSimplexNoiseGenerator = preload("res://scripts/noise-generators/OpenSimplexNoiseGenerator.gd")
 const TerrainHeightGenerator = preload("res://scripts/TerrainHeightGenerator.gd")
 const WorldChunk = preload("res://scripts/nodes/WorldChunk.gd")
 
@@ -13,10 +13,11 @@ export(int) var terrain_max_height = 64
 export(NoiseType) var terrain_noise_type = NoiseType.Flat
 
 func _ready():
-	add_world_chunk()
+#	add_world_chunk()
+	pass
 
 func _process(delta):
-	$Rotate.rotate_y(delta * 0.2)
+	$CameraRig.rotate_elbow(1, delta)
 	
 func add_world_chunk():
 	var noise_generator
