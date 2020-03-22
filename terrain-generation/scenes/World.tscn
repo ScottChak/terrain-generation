@@ -1,17 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scripts/scenes/World.gd" type="Script" id=1]
 [ext_resource path="res://scenes/CameraRig.tscn" type="PackedScene" id=2]
 
-[sub_resource type="CubeMesh" id=1]
-
 [node name="World" type="Spatial"]
 script = ExtResource( 1 )
-terrain_base_height = 4
-terrain_noise_type = 1
 
 [node name="CameraRig" parent="." instance=ExtResource( 2 )]
-
-[node name="MeshInstance" type="MeshInstance" parent="."]
-mesh = SubResource( 1 )
-material/0 = null

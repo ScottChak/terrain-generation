@@ -13,11 +13,10 @@ export(int) var terrain_max_height = 64
 export(NoiseType) var terrain_noise_type = NoiseType.Flat
 
 func _ready():
-#	add_world_chunk()
-	pass
+	add_world_chunk()
 
 func _process(delta):
-	$CameraRig.rotate_elbow(1, delta)
+	pass
 	
 func add_world_chunk():
 	var noise_generator

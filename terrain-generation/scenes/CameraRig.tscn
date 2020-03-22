@@ -11,8 +11,8 @@ __meta__ = {
 [node name="Elbow" type="Spatial" parent="."]
 
 [node name="Arm" type="Spatial" parent="Elbow"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8 )
 
 [node name="Wrist" type="Spatial" parent="Elbow/Arm"]
 
 [node name="Camera" type="Camera" parent="Elbow/Arm/Wrist"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8 )
