@@ -5,5 +5,6 @@
 
 [node name="World" type="Spatial"]
 script = ExtResource( 1 )
+terrain_noise_type = 1
 
 [node name="CameraRig" parent="." instance=ExtResource( 2 )]

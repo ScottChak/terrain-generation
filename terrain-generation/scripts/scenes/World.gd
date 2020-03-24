@@ -13,9 +13,16 @@ export(int) var terrain_max_height = 64
 export(NoiseType) var terrain_noise_type = NoiseType.Flat
 
 func _ready():
+	$CameraRig.rig_height_max = 2.5 * terrain_max_height
+	$CameraRig.rig_pivot_speed = 0.2 * PI
+	$CameraRig.elbow_bend_max = 0.25 * PI
+	$CameraRig/Elbow/Arm/Wrist/Camera.far = 1.5 * terrain_chunk_size
 	add_world_chunk()
 
 func _process(delta):
+	$CameraRig.raise_rig(1, delta)
+	$CameraRig.pivot_rig(1, delta)
+	$CameraRig.bend_elbow(1, delta)
 	pass
 	
 func add_world_chunk():
